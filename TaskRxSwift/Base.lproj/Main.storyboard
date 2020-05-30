@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urN-YH-fOM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="urN-YH-fOM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -16,14 +16,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uUE-kn-KjT">
-                                <rect key="frame" x="0.0" y="104" width="414" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="uUE-kn-KjT">
+                                <rect key="frame" x="0.0" y="104" width="414" height="170"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Bo-AI-8Zq">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                         <state key="normal" title="Task1"/>
                                         <connections>
                                             <segue destination="mPm-PD-4q9" kind="show" id="Hmq-H7-fUA"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc2-x6-i5w">
+                                        <rect key="frame" x="0.0" y="70" width="414" height="30"/>
+                                        <state key="normal" title="Task2"/>
+                                        <connections>
+                                            <segue destination="L7b-m6-tcn" kind="show" id="C59-hq-YJl"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQT-eu-b5j">
+                                        <rect key="frame" x="0.0" y="140" width="414" height="30"/>
+                                        <state key="normal" title="Task3"/>
+                                        <connections>
+                                            <segue destination="Bka-3d-bg8" kind="show" id="Wna-Ku-H2X"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -42,6 +56,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="139" y="138"/>
+        </scene>
+        <!--Task2-->
+        <scene sceneID="LHT-Kd-eQX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Task2" id="L7b-m6-tcn" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="RLc-2F-Ew1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hnS-eg-DBM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="138"/>
+        </scene>
+        <!--Task3-->
+        <scene sceneID="p17-pV-nzp">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Task3" id="Bka-3d-bg8" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="9cT-rb-bmn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uSK-VB-Ubj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="709" y="187"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ps5-Ka-vxj">
@@ -67,7 +101,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RSW-MH-Tha" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="-118"/>
+            <point key="canvasLocation" x="708" y="82"/>
         </scene>
     </scenes>
 </document>

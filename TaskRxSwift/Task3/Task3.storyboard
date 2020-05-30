@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bbA-86-QYX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Task3 View Controller-->
+        <scene sceneID="uNr-pg-Y3M">
+            <objects>
+                <viewController id="bbA-86-QYX" customClass="Task3ViewController" customModule="TaskRxSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="FLh-Qz-Q2P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="O66-ZI-9AH">
+                                <rect key="frame" x="103.5" y="54" width="207" height="88"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YAf-wx-MI0">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oh0-OB-rYq">
+                                        <rect key="frame" x="0.0" y="54" width="207" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dY-bi-yz5">
+                                <rect key="frame" x="186" y="182" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="O66-ZI-9AH" firstAttribute="width" secondItem="FLh-Qz-Q2P" secondAttribute="width" multiplier="0.5" id="8NN-Bf-QVz"/>
+                            <constraint firstItem="O66-ZI-9AH" firstAttribute="top" secondItem="Uzw-3Z-xHT" secondAttribute="top" constant="10" id="DAl-wr-wLk"/>
+                            <constraint firstItem="O66-ZI-9AH" firstAttribute="centerX" secondItem="Uzw-3Z-xHT" secondAttribute="centerX" id="HfO-Y6-RZS"/>
+                            <constraint firstItem="5dY-bi-yz5" firstAttribute="centerX" secondItem="O66-ZI-9AH" secondAttribute="centerX" id="qU0-X8-Sg3"/>
+                            <constraint firstItem="5dY-bi-yz5" firstAttribute="top" secondItem="O66-ZI-9AH" secondAttribute="bottom" constant="40" id="zEs-0O-6do"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Uzw-3Z-xHT"/>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="5dY-bi-yz5" id="JNv-JH-7JI"/>
+                        <outlet property="textField1" destination="YAf-wx-MI0" id="Cw9-i9-Ucw"/>
+                        <outlet property="textField2" destination="Oh0-OB-rYq" id="ah2-mg-FDb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bqh-sA-8BL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101" y="204"/>
+        </scene>
+    </scenes>
+</document>
