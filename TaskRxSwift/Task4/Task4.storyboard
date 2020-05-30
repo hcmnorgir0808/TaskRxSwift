@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fJK-YY-kCF">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Task4 View Controller-->
+        <scene sceneID="jDf-h4-SaH">
+            <objects>
+                <viewController id="fJK-YY-kCF" customClass="Task4ViewController" customModule="TaskRxSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="54Y-PP-4Xm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="58v-cW-sjQ">
+                                <rect key="frame" x="89" y="60" width="236" height="238"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="zy6-ko-JnS">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="238"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XbP-BG-42A">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="1L3-f1-fnS"/>
+                                                    <constraint firstAttribute="width" constant="100" id="84c-Qk-T4M"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzK-Mw-lMy">
+                                                <rect key="frame" x="0.0" y="137" width="100" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UIe-Dj-epv">
+                                                <rect key="frame" x="0.0" y="204" width="100" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="iEl-PB-eUz">
+                                        <rect key="frame" x="136" y="0.0" width="100" height="238"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmH-is-gRw">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="b8H-OF-maL"/>
+                                                    <constraint firstAttribute="height" constant="100" id="k5b-Sl-UWU"/>
+                                                </constraints>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEv-zN-vxh">
+                                                <rect key="frame" x="0.0" y="137" width="100" height="30"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="obV-Mj-3lR">
+                                                <rect key="frame" x="0.0" y="204" width="100" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" textContentType="tel"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0P-Cs-ehp">
+                                <rect key="frame" x="157" y="468" width="100" height="100"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="cOb-7Z-317"/>
+                                    <constraint firstAttribute="width" constant="100" id="g0R-lP-GBd"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LPE-CM-SBM">
+                                <rect key="frame" x="49" y="398" width="316" height="34"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O4X-uj-4aV">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FDa-Rm-rfW">
+                                        <rect key="frame" x="108" y="0.0" width="100" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tET-fb-WW1">
+                                        <rect key="frame" x="216" y="0.0" width="100" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="tET-fb-WW1" firstAttribute="width" secondItem="O4X-uj-4aV" secondAttribute="width" id="0rq-Wn-daS"/>
+                                    <constraint firstItem="FDa-Rm-rfW" firstAttribute="width" secondItem="O4X-uj-4aV" secondAttribute="width" id="liF-Uy-X10"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="w0P-Cs-ehp" firstAttribute="centerX" secondItem="LPE-CM-SBM" secondAttribute="centerX" id="5HZ-9y-TeK"/>
+                            <constraint firstItem="w0P-Cs-ehp" firstAttribute="top" secondItem="LPE-CM-SBM" secondAttribute="bottom" constant="36" id="Fqr-ry-ylj"/>
+                            <constraint firstItem="LPE-CM-SBM" firstAttribute="top" secondItem="iEl-PB-eUz" secondAttribute="bottom" constant="100" id="MZD-S5-UcL"/>
+                            <constraint firstItem="58v-cW-sjQ" firstAttribute="centerX" secondItem="Hfx-zB-j2B" secondAttribute="centerX" id="WD2-Ob-pNh"/>
+                            <constraint firstItem="LPE-CM-SBM" firstAttribute="centerX" secondItem="Hfx-zB-j2B" secondAttribute="centerX" id="bhA-0V-RvG"/>
+                            <constraint firstItem="O4X-uj-4aV" firstAttribute="width" secondItem="UIe-Dj-epv" secondAttribute="width" id="cM2-Cu-ECY"/>
+                            <constraint firstItem="58v-cW-sjQ" firstAttribute="top" secondItem="Hfx-zB-j2B" secondAttribute="top" constant="16" id="ckn-bi-lpc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hfx-zB-j2B"/>
+                    </view>
+                    <connections>
+                        <outlet property="blueTextField" destination="tET-fb-WW1" id="SXx-pa-Ph8"/>
+                        <outlet property="button1" destination="pzK-Mw-lMy" id="0Uq-pL-4dv"/>
+                        <outlet property="button2" destination="DEv-zN-vxh" id="DFW-40-axD"/>
+                        <outlet property="greenTextField" destination="FDa-Rm-rfW" id="y8v-3S-tbd"/>
+                        <outlet property="redTextField" destination="O4X-uj-4aV" id="T6I-XK-8ei"/>
+                        <outlet property="textField1" destination="UIe-Dj-epv" id="hZG-Kw-OS6"/>
+                        <outlet property="textField2" destination="obV-Mj-3lR" id="CPz-JL-wUZ"/>
+                        <outlet property="view1" destination="XbP-BG-42A" id="XQ5-70-eKv"/>
+                        <outlet property="view2" destination="nmH-is-gRw" id="kUm-Sj-BWe"/>
+                        <outlet property="view3" destination="w0P-Cs-ehp" id="UUX-IQ-vp2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fZJ-iD-YpV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="163.768115942029" y="130.58035714285714"/>
+        </scene>
+    </scenes>
+</document>

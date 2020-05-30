@@ -13,6 +13,7 @@ target 'TaskRxSwift' do
 
   pod 'NSObject+Rx'
   pod 'RxOptional'
+  pod 'RxGesture'
 
   target 'TaskRxSwiftTests' do
     inherit! :search_paths
