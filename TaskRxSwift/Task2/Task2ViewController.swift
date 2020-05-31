@@ -6,7 +6,7 @@
 //  Copyright © 2020 sakiyamaK. All rights reserved.
 //
 /*
-イベントを受け取る・流す
+ イベントを受け取る・流す
  */
 
 import UIKit
@@ -19,96 +19,95 @@ final class Task2ViewController: UIViewController, UITextFieldDelegate {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    example1()
-    example2()
-    test2()
+    //    example1()
+//    example2()
+    //    test2()
+    example5()
   }
 
   private func example1() {
 
-    //Task1のObservableクラスはイベントを流すことはできるが他からイベントを受け取ることができない
+    //Task1のObservableクラスはイベントを流すことはできるが他からイベントを発生させることできない
     // 以下の４つはイベントを受け取り、流すことができる
     // 全部自分で流したイベントを自分で受け取っている
-    do {
-      debugPrint("--- \(#function) 例1 ----")
-      //初期値がない
-      //onNext, onCompletion, onErrorがある
-      let ps = PublishSubject<Int>()
+    debugPrint("--- \(#function) 例1 ----")
+    //初期値がない
+    //onNext, onCompletion, onErrorがある
+    let ps = PublishSubject<Int>()
 
-      //イベントを受け取る処理 (今回completionとerrorは記述してない
-      ps.subscribe(onNext: { (v) in
-        debugPrint("PublishSubject: \(v)")
-      }).disposed(by: disposeBag)
+    //イベントを受け取る処理 (今回completionとerrorは記述してない
+    ps.subscribe(onNext: { (v) in
+      debugPrint("PublishSubject: \(v)")
+    }).disposed(by: disposeBag)
 
-      //イベントを流す
-      ps.onNext(1)
-      ps.onNext(2)
-      //好きなタイミングで何回でもイベントを流せる
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-        ps.onNext(3)
-      }
+    //イベントを流す
+    ps.onNext(1)
+    ps.onNext(2)
+    //好きなタイミングで何回でもイベントを流せる
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      ps.onNext(3)
     }
+  }
 
-    do {
-      debugPrint("--- \(#function) 例2 ----")
-      //初期値がある
-      //onNext, onCompletion, onErrorがある
-      let bs = BehaviorSubject<Int>(value: 0)
+  private func example2() {
+    debugPrint("--- \(#function) 例2 ----")
+    //初期値がある
+    //onNext, onCompletion, onErrorがある
+    let bs = BehaviorSubject<Int>(value: 0)
 
-      //イベントを受け取る処理 (今回completionとerrorは記述してない
-      bs.subscribe(onNext: { (v) in
-        debugPrint("BehaviorSubject: \(v)")
-      }).disposed(by: disposeBag)
+    //イベントを受け取る処理 (今回completionとerrorは記述してない
+    bs.subscribe(onNext: { (v) in
+      debugPrint("BehaviorSubject: \(v)")
+    }).disposed(by: disposeBag)
 
-      //イベントを流す
-      bs.onNext(1)
-      bs.onNext(2)
-      //好きなタイミングで何回でもイベントを流せる
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-        bs.onNext(3)
-      }
+    //イベントを流す
+    bs.onNext(1)
+    bs.onNext(2)
+    //好きなタイミングで何回でもイベントを流せる
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      bs.onNext(3)
     }
+  }
 
-    do {
-      debugPrint("--- \(#function) 例3 ----")
-      //初期値がない
-      //onNextがある
-      //onCompletion, onErrorがない
-      let pr = PublishRelay<Int>()
+  private func example3() {
+    debugPrint("--- \(#function) 例3 ----")
+    //初期値がない
+    //onNextがある
+    //onCompletion, onErrorがない
+    let pr = PublishRelay<Int>()
 
-      //イベントを受け取る処理 (今回completionとerrorは記述してない
-      pr.subscribe(onNext: { (v) in
-        debugPrint("PublishRelay: \(v)")
-      }).disposed(by: disposeBag)
+    //イベントを受け取る処理 (今回completionとerrorは記述してない
+    pr.subscribe(onNext: { (v) in
+      debugPrint("PublishRelay: \(v)")
+    }).disposed(by: disposeBag)
 
-      //イベントを流す (なぜかSubjectたちとメソッド名が違う
-      pr.accept(1)
-      pr.accept(2)
-      //好きなタイミングで何回でもイベントを流せる
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-        pr.accept(3)
-      }
+    //イベントを流す (なぜかSubjectたちとメソッド名が違う
+    pr.accept(1)
+    pr.accept(2)
+    //好きなタイミングで何回でもイベントを流せる
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      pr.accept(3)
     }
+  }
 
-    do {
-      debugPrint("--- \(#function) 例4 ----")
-      //初期値がある
-      //onNextがある
-      //onCompletion, onErrorがない
-      let pr = BehaviorRelay<Int>(value: 0)
+  private func example4() {
+    debugPrint("--- \(#function) 例4 ----")
+    //初期値がある
+    //onNextがある
+    //onCompletion, onErrorがない
+    let pr = BehaviorRelay<Int>(value: 0)
 
-      //イベントを受け取る処理 (今回completionとerrorは記述してない
-      pr.subscribe(onNext: { (v) in
-        debugPrint("BehaviorRelay: \(v)")
-      }).disposed(by: disposeBag)
+    //イベントを受け取る処理 (今回completionとerrorは記述してない
+    pr.subscribe(onNext: { (v) in
+      debugPrint("BehaviorRelay: \(v)")
+    }).disposed(by: disposeBag)
 
-      //イベントを流す (なぜかSubjectたちとメソッド名が違う
-      pr.accept(1)
-      pr.accept(2)
-      //好きなタイミングで何回でもイベントを流せる
-      DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-        pr.accept(3)
-      }
+    //イベントを流す (なぜかSubjectたちとメソッド名が違う
+    pr.accept(1)
+    pr.accept(2)
+    //好きなタイミングで何回でもイベントを流せる
+    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+      pr.accept(3)
     }
   }
 
@@ -127,17 +126,15 @@ final class Task2ViewController: UIViewController, UITextFieldDelegate {
     return true
   }
 
-  private func example2() {
-    do {
-      debugPrint("--- \(#function) 例1 ----")
-      //テキストフィールドのストリームから値を受け取りストリームに流す
-      textFieldRelay
-        .asObservable() //relayをobservableに変換する(なくても動くけど明示しといた方が安全
-        .subscribeOn(MainScheduler.instance) //問1で使うから書いておくけどsubscribeをメインスレッドで処理する
-        .subscribe(onNext: { (str) in
+  private func example5() {
+    debugPrint("--- \(#function) 例1 ----")
+    //テキストフィールドのストリームから値を受け取りストリームに流す
+    textFieldRelay
+//      .asObservable() //relayをobservableに変換する(なくても動くけど明示しといた方が安全
+      .subscribeOn(MainScheduler.instance) //問1で使うから書いておくけどsubscribeをメインスレッドで処理する
+      .subscribe(onNext: { (str) in
         debugPrint(str)
       }).disposed(by: disposeBag)
-    }
   }
 
   private func test2() {

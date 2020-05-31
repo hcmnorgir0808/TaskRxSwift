@@ -28,18 +28,22 @@ final class Task1ViewController: UIViewController {
 
   private func example1() {
     do {
+
       //(例1) イベント(この場合1)をストリームに流してコンソールに表示
       debugPrint("--- \(#function) 例1 ----")
-      Observable.of(1).subscribe(onNext: { v in
-        debugPrint(v)
-      }).disposed(by: disposeBag)
+      Observable.of("Hello World")
+        .subscribe(onNext: { value in
+          debugPrint(value)
+        })
+        .disposed(by: disposeBag)
     }
 
     do {
       //(例2) イベント(この場合1)をストリームに流して2倍してコンソールに表示
       debugPrint("--- \(#function) 例2 ----")
-      Observable.of(1).map { v -> Int in
-        v * 2
+      Observable.of(1)
+        .map { v -> Int in
+          v * 2
       }.subscribe(onNext: { v in
         debugPrint(v)
       }).disposed(by: disposeBag)
@@ -48,9 +52,10 @@ final class Task1ViewController: UIViewController {
     do {
       //(例3) イベント(0~4)をストリームに流してコンソールに表示
       debugPrint("--- \(#function) 例3 ----")
-      Observable.of(0,1,2,3,4).subscribe(onNext: { v in
-        debugPrint(v)
-      }).disposed(by: disposeBag)
+      Observable.of(0,1,2,3,4)
+        .subscribe(onNext: { v in
+          debugPrint(v)
+        }).disposed(by: disposeBag)
     }
   }
 
@@ -58,7 +63,7 @@ final class Task1ViewController: UIViewController {
     //(問1)
     // 0~4をストリームに流して、
     // ２倍して
-    // 10以下だけコンソールに表示
+    // 5以下だけコンソールに表示
     // https://rxmarbles.com/ から目的のオペレータを探してみよう
     debugPrint("--- \(#function) 問1 ----")
     Observable.from([0,1,2,3,4])
@@ -85,19 +90,15 @@ final class Task1ViewController: UIViewController {
       //全てのストリームが流れ終わるとcompletion
     }
 
-    enum RxSwiftError: Error {
-      case error
-    }
-
     do {
       //(例2)
       debugPrint("--- \(#function) 例2 ----")
 
       //例外イベントをストリームに流す
-      let observable = Observable.from([0,1,2,3,4])
+      let observable = Observable.from([0,1,2,3,4,5,6])
 
       observable.do(onNext: { v in //doメソッドはストリームが流れたら処理を挟む
-        if v == 4 { throw RxSwiftError.error }
+        if v == 4 { throw NSError.init(domain: "error", code: 0, userInfo: nil) }
       }).subscribe(onNext: { v in
         debugPrint("success: \(v)")
       }, onError: { e in
@@ -118,6 +119,7 @@ final class Task1ViewController: UIViewController {
     for _ in 0...10 {
       //0~10をランダムに出すストリーム
       let observable = Observable.of(Int.random(in: 0...10))
+
       observable
         //ここに何か操作関数を入れて意図的にエラーを出す
         .subscribe(onNext: { v in

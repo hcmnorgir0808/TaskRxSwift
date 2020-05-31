@@ -13,17 +13,17 @@ import RxSwift
 import RxCocoa
 
 final class Task3ViewController: UIViewController, UITextFieldDelegate {
-
+  
   private let disposeBag = DisposeBag()
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     example1()
     test1()
   }
-
+  
   private func example1() {
-
+    
     //(例1) 複数のストリームを合成
     // イメージ的にはor
     // 何かがきたら流れる
@@ -35,7 +35,7 @@ final class Task3ViewController: UIViewController, UITextFieldDelegate {
         debugPrint(v)
       }).disposed(by: disposeBag)
     }
-
+    
     //(例2) 複数のストリームの最後に流れたイベントを合体
     // aとbのstreamが(a,b)とひとつのtuppleになる
     do {
@@ -47,7 +47,7 @@ final class Task3ViewController: UIViewController, UITextFieldDelegate {
       }).disposed(by: disposeBag)
     }
   }
-
+  
   @IBOutlet private weak var textField1: UITextField! {
     didSet {
       textField1.delegate = self
@@ -59,10 +59,10 @@ final class Task3ViewController: UIViewController, UITextFieldDelegate {
     }
   }
   @IBOutlet private weak var label: UILabel!
-
+  
   private let textField1Relay = BehaviorRelay<String>(value: "")
   private let textField2Relay = BehaviorRelay<String>(value: "")
-
+  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField == textField1 {
       textField1Relay.accept(textField.text ?? "")
@@ -71,8 +71,8 @@ final class Task3ViewController: UIViewController, UITextFieldDelegate {
     }
     return true
   }
-
-
+  
+  
   private func test1() {
     //ふたつのテキストフィールドの文字を合成してlabelに出す
     //textField1.textが "あいうえお"
