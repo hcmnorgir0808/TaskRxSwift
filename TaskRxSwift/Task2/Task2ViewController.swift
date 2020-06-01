@@ -6,7 +6,7 @@
 //  Copyright © 2020 sakiyamaK. All rights reserved.
 //
 /*
- イベントを受け取る・流す
+ イベントを発火する、購買する
  */
 
 import UIKit
