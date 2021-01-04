@@ -78,5 +78,13 @@ final class Task3ViewController: UIViewController, UITextFieldDelegate {
     //textField1.textが "あいうえお"
     //textField2.textが "かきくけこ"
     //なら labelに"あいうえおかきくけこ"
+    Observable.combineLatest(textField1Relay.asObservable(), textField2Relay.asObservable())
+      .map({ (str1, str2) -> String in
+        str1 + str2
+      })
+      .subscribeOn(MainScheduler.instance)
+      .subscribe {[weak self] (str) in
+        self?.label.text = str
+      }.disposed(by: disposeBag)
   }
 }

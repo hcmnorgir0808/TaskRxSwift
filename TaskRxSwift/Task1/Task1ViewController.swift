@@ -67,7 +67,9 @@ final class Task1ViewController: UIViewController {
     // https://rxmarbles.com/ から目的のオペレータを探してみよう
     debugPrint("--- \(#function) 問1 ----")
     Observable.from([0,1,2,3,4])
-      //ここに何か操作関数を入れる
+      .map({ (v) -> Int in
+        v * 2
+      })
       .subscribe(onNext: { v in
         debugPrint(v)
       }).disposed(by: disposeBag)
@@ -120,13 +122,15 @@ final class Task1ViewController: UIViewController {
       //0~10をランダムに出すストリーム
       let observable = Observable.of(Int.random(in: 0...10))
 
-      observable
-        //ここに何か操作関数を入れて意図的にエラーを出す
-        .subscribe(onNext: { v in
+      observable.do(onNext: { (v) in
+          if v%2 == 0 { throw NSError.init(domain: "error", code: 0, userInfo: nil) }
+        }).subscribe(onNext: { v in
           debugPrint(v)
-        }
-          //ここに何かクロージャーを入れてエラーの時と完了の時に処理をする
-      ).disposed(by: disposeBag)
+        }, onError: { e in
+          debugPrint("error: \(e) ")
+        }, onCompleted: {
+          debugPrint("completion")
+        }).disposed(by: disposeBag)
     }
   }
 }
