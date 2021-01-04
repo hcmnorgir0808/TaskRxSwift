@@ -32,6 +32,7 @@ final class Task4ViewController: UIViewController, HasDisposeBag/*NSObject_Rxを
     super.viewDidLoad()
     example1()
     example2()
+    test()
   }
 
   private func example1() {
@@ -100,5 +101,34 @@ final class Task4ViewController: UIViewController, HasDisposeBag/*NSObject_Rxを
     //redTextField, greenTextField, blueTextField
     //３つのテキストフィールドの値が変わったらイベントを流して
     //view3のbackgroundColorの色を変える
+    let changeColorObservable: Observable<UIColor> = Observable.combineLatest(
+      redTextField.rx.controlEvent(.editingChanged)
+        .map {[weak self] _ -> CGFloat? in
+          guard let text = self?.redTextField.text else { return nil }
+          let value = CGFloat(Double(text) ?? 0.0)
+          return min(1.0, max(0.0, value/255)) //0~1の間になる
+        },
+      greenTextField.rx.controlEvent(.editingChanged)
+        .map {[weak self] _ -> CGFloat? in
+          guard let text = self?.greenTextField.text else { return nil }
+          let value = CGFloat(Double(text) ?? 0.0)
+          return min(1.0, max(0.0, value/255)) //0~1の間になる
+        },
+      blueTextField.rx.controlEvent(.editingChanged)
+        .map {[weak self] _ -> CGFloat? in
+          guard let text = self?.blueTextField.text else { return nil }
+          let value = CGFloat(Double(text) ?? 0.0)
+          return min(1.0, max(0.0, value/255)) //0~1の間になる
+        }
+      ).filter {
+        $0.0 != nil && $0.1 != nil && $0.2 != nil
+      }.map {
+        UIColor(red: $0.0!, green: $0.1!, blue: $0.2!, alpha: 1.0)
+      }
+
+    changeColorObservable.subscribeOn(MainScheduler.instance).debug().subscribe(onNext: {[weak self] (color) in
+      self?.view3.backgroundColor = color
+    }).disposed(by: disposeBag)
+
   }
 }
