@@ -67,10 +67,12 @@ final class Task1ViewController: UIViewController {
     // https://rxmarbles.com/ から目的のオペレータを探してみよう
     debugPrint("--- \(#function) 問1 ----")
     Observable.from([0,1,2,3,4])
-      //ここに何か操作関数を入れる
-      .subscribe(onNext: { v in
-        debugPrint(v)
-      }).disposed(by: disposeBag)
+        .map { $0 * 2 }
+        .filter { $0 <= 5 }
+        .subscribe(onNext: { v in
+            debugPrint(v)
+        })
+        .disposed(by: disposeBag)
   }
 
   private func example2() {
@@ -116,17 +118,24 @@ final class Task1ViewController: UIViewController {
     // ランダムな数値をストリームに流して、表示してcompletionかerrorにする
     debugPrint("--- \(#function) 問1 ----")
     //1度だけストリームを流して終了させる処理を10回テスト
-    for _ in 0...10 {
-      //0~10をランダムに出すストリーム
-      let observable = Observable.of(Int.random(in: 0...10))
-
-      observable
-        //ここに何か操作関数を入れて意図的にエラーを出す
-        .subscribe(onNext: { v in
-          debugPrint(v)
-        }
-          //ここに何かクロージャーを入れてエラーの時と完了の時に処理をする
-      ).disposed(by: disposeBag)
+    for _ in 1...10 {
+        //0~10をランダムに出すストリーム
+        let observable = Observable.of(Int.random(in: 0...10))
+        
+        observable
+            .do(onNext: { v in
+                if v > 5 { throw NSError.init(domain: "error", code: 0, userInfo: nil) }
+            })
+            //ここに何か操作関数を入れて意図的にエラーを出す
+            .subscribe(onNext: { v in
+                debugPrint("success: \(v)")
+            }, onError: { e in
+                debugPrint("error: \(e)")
+            }, onCompleted: {
+                debugPrint("completion")
+            }
+            //ここに何かクロージャーを入れてエラーの時と完了の時に処理をする
+            ).disposed(by: disposeBag)
     }
   }
 }
