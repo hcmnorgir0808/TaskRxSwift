@@ -21,7 +21,7 @@ final class Task2ViewController: UIViewController, UITextFieldDelegate {
     super.viewDidLoad()
     //    example1()
 //    example2()
-    //    test2()
+        test2()
     example5()
   }
 
@@ -140,5 +140,11 @@ final class Task2ViewController: UIViewController, UITextFieldDelegate {
   private func test2() {
     debugPrint("--- \(#function) 問1 ----")
     //テキストフィールドのストリームから受け取った値をlabelのテキストにする
+    
+    textFieldRelay
+        .subscribe(on: MainScheduler.instance)
+        .subscribe(onNext: { [weak self] (str) in
+            self?.label.text = str
+        }).disposed(by: disposeBag)
   }
 }
