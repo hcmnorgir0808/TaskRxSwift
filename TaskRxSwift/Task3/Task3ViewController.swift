@@ -74,6 +74,14 @@ final class Task3ViewController: UIViewController, UITextFieldDelegate {
   
   
   private func test1() {
+    Observable.combineLatest(self.textField1Relay, self.textField2Relay)
+        .subscribe(on: MainScheduler.instance)
+        // 先にmapで文字列結合
+        .map { $0 + $1 }
+        .subscribe(onNext: { str in
+            self.label.text = str
+        }).disposed(by: disposeBag)
+   
     //ふたつのテキストフィールドの文字を合成してlabelに出す
     //textField1.textが "あいうえお"
     //textField2.textが "かきくけこ"
