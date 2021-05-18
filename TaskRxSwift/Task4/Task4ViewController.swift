@@ -30,8 +30,9 @@ final class Task4ViewController: UIViewController, HasDisposeBag/*NSObject_Rxを
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    example1()
-    example2()
+//    example1()
+//    example2()
+    test()
   }
 
   private func example1() {
@@ -100,5 +101,22 @@ final class Task4ViewController: UIViewController, HasDisposeBag/*NSObject_Rxを
     //redTextField, greenTextField, blueTextField
     //３つのテキストフィールドの値が変わったらイベントを流して
     //view3のbackgroundColorの色を変える
+    let rgbColorObservables = [redTextField, greenTextField, blueTextField].map { (textField) -> Observable<CGFloat> in
+        textField.rx.controlEvent(.editingChanged)
+            .map { _ -> CGFloat in //mapで流れるイベントをUIColorに変換
+                guard let text = textField.text else { return .zero }
+                //textfieldのテキストに合わせてUIColorを生成してイベントとする
+                let value = CGFloat(Double(text) ?? 0.0)
+                return min(1.0, max(0.0, value/255))
+            }
+    }
+    
+    Observable.combineLatest(rgbColorObservables)
+        .subscribe(on: MainScheduler.instance)
+        .map { UIColor(red: $0[0], green: $0[1], blue: $0[2], alpha: 1) }
+        .subscribe(onNext: { [weak self] (color) in
+            self?.view3.backgroundColor = color
+        })
+        .disposed(by: disposeBag)
   }
 }
