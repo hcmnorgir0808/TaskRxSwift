@@ -14,6 +14,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+public enum TestError : Error {
+    case test
+}
+
 final class Task1ViewController: UIViewController {
 
   private let disposeBag = DisposeBag()
@@ -21,42 +25,98 @@ final class Task1ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     example1()
-    test1()
-    example2()
-    test2()
+//    test1()
+//    example2()
+//    test2()
   }
 
   private func example1() {
-    do {
+      do {
+          debugPrint("--- \(#function) 正常終了 ----")
+          let sequence = Observable.of(1, 2)
+              .flatMap { string -> Observable<String> in
+                  print("flatMap: \(string)")
+                  let observable = Observable<String>.create { observer in
+                      observer.onNext("A")
 
-      //(例1) イベント(この場合1)をストリームに流してコンソールに表示
-      debugPrint("--- \(#function) 例1 ----")
-      Observable.of("Hello World")
-        .subscribe(onNext: { value in
-          debugPrint(value)
-        })
-        .disposed(by: disposeBag)
-    }
+                      observer.onCompleted()
 
-    do {
-      //(例2) イベント(この場合1)をストリームに流して2倍してコンソールに表示
-      debugPrint("--- \(#function) 例2 ----")
-      Observable.of(1)
-        .map { v -> Int in
-          v * 2
-      }.subscribe(onNext: { v in
-        debugPrint(v)
-      }).disposed(by: disposeBag)
-    }
+                      observer.onNext("B")
 
-    do {
-      //(例3) イベント(0~4)をストリームに流してコンソールに表示
-      debugPrint("--- \(#function) 例3 ----")
-      Observable.of(0,1,2,3,4)
-        .subscribe(onNext: { v in
-          debugPrint(v)
-        }).disposed(by: disposeBag)
-    }
+                      return Disposables.create() {
+                          print("Dispose Action:")
+                      }
+                  }
+
+                  return observable
+              }
+
+          _ = sequence
+              .subscribe(onNext: {
+                  print("onNext: \($0)")
+              }, onError: {
+                  print("onError: \($0)")
+              }, onCompleted: {
+                  print("onCompleted:")
+              }, onDisposed: {
+                  print("onDisposed:")
+              })
+      }
+
+      do {
+          debugPrint("--- \(#function) 異常終了 ----")
+          let sequence = Observable.of(1, 2)
+              .flatMap { string -> Observable<String> in
+                  print("flatMap: \(string)")
+                  let observable = Observable<String>.create { observer in
+                      observer.onNext("A")
+
+                      observer.onError(TestError.test)
+
+                      observer.onNext("B")
+
+                      return Disposables.create() {
+                          print("Dispose Action:")
+                      }
+                  }
+
+                  return observable
+              }
+
+          _ = sequence
+              .subscribe(onNext: {
+                  print("onNext: \($0)")
+              }, onError: {
+                  print("onError: \($0)")
+              }, onCompleted: {
+                  print("onCompleted:")
+              }, onDisposed: {
+                  print("onDisposed:")
+              })
+      }
+
+      do {
+          debugPrint("--- \(#function) 購読の破棄 ----")
+          let subject = PublishSubject<String>()
+
+          let disposable = subject
+              .subscribe(onNext: {
+                  print("onNext: \($0)")
+              }, onError: {
+                  print("onError: \($0)")
+              }, onCompleted: {
+                  print("onCompleted:")
+              }, onDisposed: {
+                  print("onDisposed:")
+              })
+
+          subject.onNext("A")
+
+          disposable.dispose()
+
+          subject.onNext("B")
+          subject.onCompleted()
+      }
   }
 
   private func test1() {
