@@ -32,7 +32,8 @@ final class Task1ViewController: UIViewController {
 //        sampleCatchErrorOperator()
 //        sampleCatchErrorJustReturn()
 //        sampleMaterializeOperator()
-        divideMaterialize()
+//        divideMaterialize()
+        anyErrorMaterialize()
     }
 
   private func example1() {
@@ -371,6 +372,37 @@ final class Task1ViewController: UIViewController {
             }, onDisposed: {
                 print("elements, onDisposed:")
             })
+
+        _ = error
+            .subscribe(onNext: { (error: Error) in
+                print("errors, onNext: \(error)")
+            }, onError: {
+                print("errors, onError: \($0)")
+            }, onCompleted: {
+                print("errors, onCompleted:")
+            }, onDisposed: {
+                print("errors, onDisposed:")
+            })
+    }
+
+    func anyErrorMaterialize() {
+        let observable = Observable<String>.create { observer in
+            observer.onNext("A")
+            observer.onError(TestError.test)
+            return Disposables.create()
+        }
+
+        let result = observable.materialize()
+        // TestErrorのみのErrorだけ通すストリーム
+
+        let error: Observable<TestError> = result
+            .errors()
+            .map {
+                guard let error = $0 as? TestError else {
+                    fatalError()
+                }
+                return error
+            }
 
         _ = error
             .subscribe(onNext: { (error: Error) in
