@@ -22,13 +22,16 @@ final class Task1ViewController: UIViewController {
 
   private let disposeBag = DisposeBag()
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    example1()
-//    test1()
-//    example2()
-//    test2()
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        example1()
+        //    test1()
+        //    example2()
+        //    test2()
+//        sampleRetryOperator()
+//        sampleCatchErrorOperator()
+        sampleCatchErrorJustReturn()
+    }
 
   private func example1() {
       do {
@@ -198,6 +201,88 @@ final class Task1ViewController: UIViewController {
             ).disposed(by: disposeBag)
     }
   }
+
+    func sampleRetryOperator() {
+        let sequenceThatErrors = Observable<String>.create { observer in
+            observer.onNext("A")
+
+            observer.onError(TestError.test)
+            print("Error encountered")
+
+            observer.onNext("B")
+            observer.onCompleted()
+
+            return Disposables.create()
+        }
+
+        sequenceThatErrors
+            .retry(1) // 1.
+            .subscribe(onNext: {
+                print("onNext: \($0)")
+            }, onError: {
+                print("onError: \($0)")
+            }, onCompleted: {
+                print("onCompleted:")
+
+            }, onDisposed: {
+                print("onDisposed:")
+            })
+    }
+
+    func sampleCatchErrorOperator() {
+        let sequenceThatErrors = Observable<String>.create { observer in
+            observer.onNext("A")
+            observer.onNext("B")
+            observer.onError(TestError.test)
+
+            observer.onCompleted()
+
+            return Disposables.create()
+        }
+
+        _ = sequenceThatErrors
+        // 1.
+            .catchError { error in
+                // catchはObservableを返す
+                if error is TestError {
+                    return Observable.just("Z")
+                } else {
+                    return Observable.empty()
+                }
+            }
+            .subscribe(onNext: {
+                print("onNext: \($0)")
+            }, onError: {
+                print("onError: \($0)")
+            }, onCompleted: {
+                print("onCompleted:")
+            }, onDisposed: {
+                print("onDisposed:")
+            })
+    }
+
+    func sampleCatchErrorJustReturn() {
+        let sequenceThatErrors = Observable<String>.create { observer in
+            observer.onNext("A")
+            observer.onError(TestError.test)
+            observer.onNext("B")
+            observer.onCompleted()
+
+            return Disposables.create()
+        }
+
+        _ = sequenceThatErrors
+            .catchAndReturn("Y") // 1.
+            .subscribe(onNext: {
+                print("onNext: \($0)")
+            }, onError: {
+                print("onError: \($0)")
+            }, onCompleted: {
+                print("onCompleted:")
+            }, onDisposed: {
+                print("onDisposed:")
+            })
+    }
 }
 
 
