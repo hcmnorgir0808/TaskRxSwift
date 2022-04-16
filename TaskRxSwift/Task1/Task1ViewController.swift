@@ -31,7 +31,8 @@ final class Task1ViewController: UIViewController {
 //        sampleRetryOperator()
 //        sampleCatchErrorOperator()
 //        sampleCatchErrorJustReturn()
-        sampleMaterializeOperator()
+//        sampleMaterializeOperator()
+        divideMaterialize()
     }
 
   private func example1() {
@@ -344,6 +345,61 @@ final class Task1ViewController: UIViewController {
 //                print("onCompleted:")
 //            })
     }
+
+    func divideMaterialize() {
+        let observable = Observable<String>.create { observer in
+            observer.onNext("A")
+            observer.onError(TestError.test)
+            return Disposables.create()
+        }
+
+        //
+        let result = observable.materialize()
+        // 1.
+        let element: Observable<String> = result.elements()
+
+        // 2.
+        let error: Observable<Error> = result.errors()
+
+        _ = element
+            .subscribe(onNext: { (value: String) in
+                print("elements, onNext: \(value)")
+            }, onError: {
+                print("elements, onError: \($0)")
+            }, onCompleted: {
+                print("elements, onCompleted:")
+            }, onDisposed: {
+                print("elements, onDisposed:")
+            })
+
+        _ = error
+            .subscribe(onNext: { (error: Error) in
+                print("errors, onNext: \(error)")
+            }, onError: {
+                print("errors, onError: \($0)")
+            }, onCompleted: {
+                print("errors, onCompleted:")
+            }, onDisposed: {
+                print("errors, onDisposed:")
+            })
+    }
 }
 
+extension ObservableType where Element: EventConvertible {
 
+    // 2.
+    public func elements() -> Observable<Element.Element> {
+        return compactMap { $0.event.element }
+
+        // element == nilのEvent<T>を取り出してelementを取り出す
+//        return filter { $0.event.element != nil }
+//            .map { $0.event.element! }
+    }
+
+    // 3.
+    public func errors() -> Observable<Swift.Error> {
+        return compactMap { $0.event.error }
+//        return filter { $0.event.error != nil }
+//            .map { $0.event.error! }
+    }
+}
