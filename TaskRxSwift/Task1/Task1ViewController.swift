@@ -30,7 +30,8 @@ final class Task1ViewController: UIViewController {
         //    test2()
 //        sampleRetryOperator()
 //        sampleCatchErrorOperator()
-        sampleCatchErrorJustReturn()
+//        sampleCatchErrorJustReturn()
+        sampleMaterializeOperator()
     }
 
   private func example1() {
@@ -282,6 +283,66 @@ final class Task1ViewController: UIViewController {
             }, onDisposed: {
                 print("onDisposed:")
             })
+    }
+
+    func sampleMaterializeOperator() {
+        let observable = Observable<String>.create { observer in
+            observer.onNext("B")
+            observer.onError(TestError.test)
+
+            return Disposables.create()
+        }
+
+        let result = observable.materialize()
+
+        // 正常系の結果のみを取り出すため要素のみ取り出したストリーム
+        let elements = result
+        // nextと確定
+            .filter { $0.element != nil }
+            .map { $0.element! }
+
+        // 異常系の結果のみを取り出すためエラーのみを取り出したストリーム
+        let errors = result
+        // errorと確定
+            .filter { $0.error != nil }
+            .map { $0.error! }
+
+        _ = elements
+            .subscribe(onNext: { (value: String) in
+                print("elements, onNext: \(value)")
+            }, onError: {
+                print("elements, onError: \($0)")
+            }, onCompleted: {
+                print("elements, onCompleted:")
+            }, onDisposed: {
+                print("elements, onDisposed:")
+            })
+
+        _ = errors
+            .subscribe(onNext: { (error: Error) in
+                print("errors, onNext: \(error)")
+            }, onError: {
+                print("errors, onError: \($0)")
+            }, onCompleted: {
+                print("errors, onCompleted:")
+            }, onDisposed: {
+                print("errors, onDisposed:")
+            })
+//        _ = observable.materialize()
+//            .subscribe(onNext: { (event: Event<String>) in
+//                switch event {
+//                case .next(let value):
+//                    print("value: \(value)")
+//                case .error(let error):
+//                    print("error: \(error)")
+//                case .completed:
+//                    break
+//                }
+//            }, onError: {
+//                print("onError, onError: \($0)")
+//            }, onCompleted: {
+//                print("onCompleted:")
+//            })
     }
 }
 
